@@ -1,15 +1,16 @@
 version: '2'
+
 services:
   php:
     image: yiisoftware/yii2-php:7.4-apache
+    container_name: php-code
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./:/app:delegated
     ports:
       - '8111:80'
-    networks:
-      - app-network
-    #MySQL Service
+    network_mode: bridge
+
   db:
     image: mysql:5.7.22
     container_name: db
@@ -22,10 +23,4 @@ services:
       MYSQL_ROOT_PASSWORD: root
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-    networks:
-      - app-network
-
-#Docker Networks
-networks:
-  app-network:
-    driver: bridge
+    network_mode: bridge
