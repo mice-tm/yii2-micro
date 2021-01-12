@@ -28,7 +28,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning', 'trace'],
+                    'levels' => ['error', 'warning', 'profile'],
                     'logVars' => [],
                     'exportInterval' => 1,
                     'fileMode' => 0777
@@ -69,12 +69,12 @@ if (YII_ENV_DEV) {
 //        //'allowedIPs' => ['127.0.0.1', '::1'],
 //    ];
     
-//    $config['bootstrap'][] = 'gii';
-//    $config['modules']['gii'] = [
-//        'class' => 'yii\gii\Module',
-//        // uncomment the following to add your IP if you are not connecting from localhost.
-//        //'allowedIPs' => ['127.0.0.1', '::1'],
-//    ];
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
 }
 
 return $config;

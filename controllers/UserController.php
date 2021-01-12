@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\User;
+use yii\data\ActiveDataProvider;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\filters\VerbFilter;
@@ -65,7 +67,14 @@ class UserController extends ActiveController
 
     public function actionIndex()
     {
-        return ['yo index'];
+        return new ActiveDataProvider(
+            [
+                'query' => User::find(),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+            ]
+        );
     }
 
     public function actionGreet()
