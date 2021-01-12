@@ -20,7 +20,6 @@ features to your application.
 DIRECTORY STRUCTURE
 -------------------
 
-      assets/             contains assets definition
       commands/           contains console commands (controllers)
       config/             contains application configurations
       controllers/        contains Web controller classes
@@ -74,7 +73,7 @@ Start the container
     
 You can then access the application through the following URL:
 
-    http://127.0.0.1:8000
+    http://127.0.0.1:8111
 
 **NOTES:** 
 - Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
