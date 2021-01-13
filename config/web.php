@@ -1,5 +1,8 @@
 <?php
 
+use app\services\DiscountService;
+use app\services\DiscountServiceInterface;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -42,39 +45,29 @@ $config = [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => ['user'],
-                    'only' => ['options', 'greet', 'index'],
-//                    'except' => ['delete', 'update', 'create', 'index', 'view'],
-                    'patterns' => [
-                        'GET greet' => 'greet',
-                        'OPTIONS' => 'options',
-                        'GET,HEAD' => 'index',
-                        '' => 'options',
-                    ]
-                ],
+                'POST generate' => 'discounts/generate',
+                'POST apply' => 'discounts/apply',
+//                [
+//                    'class' => 'yii\rest\UrlRule',
+//                    'controller' => ['user'],
+//                    'only' => ['options', 'greet', 'index'],
+////                    'except' => ['delete', 'update', 'create', 'index', 'view'],
+//                    'patterns' => [
+//                        'GET greet' => 'greet',
+//                        'OPTIONS' => 'options',
+//                        'GET,HEAD' => 'index',
+//                        '' => 'options',
+//                    ]
+//                ],
             ],
         ],
     ],
     'params' => $params,
+    'container' => [
+        'definitions' => [
+            DiscountServiceInterface::class => DiscountService::class
+        ],
+    ],
 ];
-
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-//    $config['bootstrap'][] = 'debug';
-//    $config['modules']['debug'] = [
-//        'class' => 'yii\debug\Module',
-//        // uncomment the following to add your IP if you are not connecting from localhost.
-//        //'allowedIPs' => ['127.0.0.1', '::1'],
-//    ];
-    
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
-}
 
 return $config;
